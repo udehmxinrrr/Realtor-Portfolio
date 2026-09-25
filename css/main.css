@@ -9,6 +9,12 @@ body{
 html{
     scroll-behavior: smooth ;
 }
+:root {
+  --navy-base: #0a1628;      /* your About section navy */
+  --navy-darker: #060d1a;    /* one shade down, for variation */
+  --navy-deepest: #030710;   /* deepest shade, for Contact */
+  --accent: #f0bf2e;         /* your gold */
+}
 
 @font-face{
     font-family: Liga Sans;
@@ -26,7 +32,7 @@ html{
 }
 
 .hero{
-    background-image: url(../pexels-jeffrey-eisen-1257101-37485070.jpg);
+    background-image: url(../pexels-dennis-salamida-1882776-14974363.jpg);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -40,7 +46,6 @@ html{
   background-clip: text;
   color: transparent;
   width: fit-content;
-
   /* soft halo around the letters only */
   filter: drop-shadow(0 0 12px rgba(0,0,0,.55))
           drop-shadow(0 2px 4px rgba(0,0,0,.4));
@@ -54,12 +59,23 @@ html{
   from { opacity: 0; transform: translateY(40px); }
   to   { opacity: 1; transform: none; }
 }
-
 .hero-h3 { animation-delay: .25s; }
 @keyframes rise {
   from { opacity: 0; transform: translateY(40px); }
   to   { opacity: 1; transform: none; }
 }
+
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  transition-delay: var(--reveal-delay, 0s);
+}
+.reveal.in-view {
+  opacity: 1;
+  transform: none;
+}
+
 
 .navbar{
     z-index: 1000;
@@ -78,7 +94,6 @@ html{
     justify-content: center;
     padding: 20px 32px;
     position: fixed;
-    border: 0.5px solid rgba(255, 255, 255, 0.17);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
     border-radius: 50px;
     background-color: rgba(255, 255, 255, 0.15);
@@ -93,7 +108,7 @@ a{
     font-size: 20px;
 }
 .nav-links:hover{
-    color: white;
+    color: var(--accent);
 }
 .hero-content{
     width: 100%;
@@ -106,50 +121,97 @@ a{
 }
 .hero-h1{
     font-family: "Liga Sans", Arial, sans-serif;
-    color: rgb(255, 255, 255);
+    color: var(--accent);
     font-size: 135px;
-    padding-left: 60px;
+    padding-left: 100px;
 }
 .hero-h3{
     font-family: "Liga Sans", Arial, sans-serif;
-    color: rgb(255, 255, 255);
+    color: var(--accent);
     font-size: 70px;
-    padding-left: 60px;
+    padding-left: 100px;
 }
 
 
 .about-sec{
     min-height: 500px;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: start;
+    justify-content: center;
+    position: relative;
+    background: #0a1628; /* your navy */
+    clip-path: polygon(0 40px, 100% 0, 100% 100%, 0 100%);
+    margin-top: -70px; /* pulls it up to overlap the hero */
+    scroll-margin: -40px;
+}
+.about-inner {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1200px; /* caps how wide the content spreads on big screens */
+  margin: 0 auto;
+  padding: 40px 80px;
+  gap: 40px;
+}
+.about-content {
+  padding: 70px 0;
+  width: 50%;
+  height: fit-content;
+}
+.photo-wrapper {
+  padding: 70px 0;
+  width: 45%;
+  height: fit-content;
+  display: flex;
+  justify-content: center; /* centers the fixed-width blob within its column */
 }
 .about-content{
-    padding-top: 70px;
-    width: 80%;
-    height: 100vh;
+    padding: 70px 0;
+    width: 45%;
+    height: fit-content;
+}
+.blob-photo {
+  width: 450px;
+  height: 450px; /* match width for a true circle */
+  object-fit: cover;
+  border-radius: 50%;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 2;
+}
+.blob-wrapper {
+  position: relative;
+  width: 500px;
+  height: 500px;
 }
 .about-txt{
     font-family: "Liga Sans", Arial, sans-serif;
     color: rgb(255, 255, 255);
     font-size: 60px;
 }
+.about-subtxt{
+    font-family: "Liga Sans", Arial, sans-serif;
+    color: rgb(255, 255, 255);
+    font-size: 34px;
+}
+.about-context{
+    font-family: "Liga Sans", Arial, sans-serif;
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+}
 span{
-    color: rgb(11, 77, 177);
+    color: var(--accent);
 }
 .span-txt-1{
     font-size: 50px;
 }
-.about-subtxt{
-    font-family: "Liga Sans", Arial, sans-serif;
-    color: rgb(255, 255, 255);
-    font-size: 50px;
-}
-.hero-h1,
+.hero-h1, .project-info,
 .hero-h3, .project-desc,
 .about-subtxt,
-.about-txt {
+.about-txt, .about-context {
   font-variant-ligatures: none;
   font-feature-settings: "liga" 0, "dlig" 0, "calt" 0;
 }
@@ -161,27 +223,18 @@ span{
     flex-direction: column;
     align-items: center;
     justify-content: start;
-    background-color:rgb(0, 0, 0);
-}
-.service{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: start;
-    flex-direction: row;
-}
-.serv-heading{
-    font-family: "Liga Sans", Arial, sans-serif;
-    color: rgb(255, 255, 255);
-    padding-top: 20px;
-    font-size: 50px;
+    clip-path: polygon(100% 40px, 0 0, 0 100%, 100% 100%);
+    margin-top: -70px; /* pulls it up to overlap the hero */
+    padding-top: 80px;
+    scroll-margin: -60px;
+    background: var(--navy-darker);
 }
 .service {
+  width: 80%;
   min-height: 700px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: rgb(0, 0, 0);
   padding: 0 50px 60px;
 }
 .serv-heading {
@@ -200,32 +253,68 @@ span{
   gap: 20px;
   padding-top: 20px;
 }
+.service-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px; /* replaces the icon's old margin-bottom */
+}
 .services-card .desc {
   flex: 1;                 
   display: flex;
   flex-direction: column;
 }
-.services-card {
-  position: relative;
-  overflow: hidden;
-  width: 400px;
-  height: auto;
-  display: flex;  
-  padding: 24px;
-  background-color: black;
-  border: 1px solid white;
-  border-radius: 25px;
-  transition: transform .25s ease, border-color .25s ease;
+.service-card {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 20px;
+  padding: 40px 30px;
+  width: 300px;
 }
-.services-card:hover {
-  transform: translateY(-6px);
-  border-color: #ffffff;
+.service-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  background: rgba(240, 191, 46, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0;
 }
-.serv-title {
-  margin: 0 0 12px;
-  font-family: "League Spartan", Arial, sans-serif;
-  font-size: 28px;
+.service-icon img {
+  width: 26px;
+  height: 26px;
+}
+.service-title {
+  font-family: "Liga Sans", Arial, sans-serif;
   color: white;
+  font-size: 22px;
+  margin-bottom: 0;
+}
+.service-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.service-list li {
+  color: white;
+  font-family: "League Spartan", Arial, sans-serif;
+  font-size: 14px;
+  opacity: 0.85;
+  line-height: 1.8;
+  padding-left: 18px;
+  position: relative;
+}
+.service-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
 }
 .serv-desc {
   flex: 1;
@@ -255,20 +344,28 @@ span{
     flex-direction: column;
     align-items: center;
     justify-content: start;
-    background-color:rgb(11, 77, 177);
+    clip-path: polygon(0 40px, 100% 0, 100% 100%, 0 100%);
+    margin-top: -70px; /* pulls it up to overlap the hero */
+    padding-top: 80px;
+    scroll-margin: -60px;
+    background: var(--navy-base);
 }
 .project{
     width: 80%;
     height: 100%;
     display: flex;
-    justify-content: start;
     flex-direction: column;
 }
 .project-container{
     width: 100%;
     height: 100%;
     display: flex;
+    padding: 12px 0;
     flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
     justify-content: space-evenly;
 }
 .proj-heading{
@@ -278,17 +375,56 @@ span{
     font-size: 50px;
 }
 .project-card {
-  margin-top:30px;
-  position: relative;
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 20px;
   overflow: hidden;
-  width: 500px;
-  min-height: 300px;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  padding: 10px;
-  background-color: black;
-  border-radius: 25px;
+  flex: 1 1 300px; /* grow, shrink, but never smaller than 300px */
+  max-width: 380px; /* prevents cards from stretching too wide on large screens */
+}
+.project-img {
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+}
+.project-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.project-info {
+  padding: 24px;
+}
+.project-title {
+  font-family: "Liga Sans", Arial, sans-serif;
+  color: white;
+  font-size: 22px;
+  margin-bottom: 12px;
+}
+.project-desc {
+  font-family: "League Spartan", Arial, sans-serif;
+  color: white;
+  font-size: 14px;
+  opacity: 0.8;
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+.project-link {
+  font-family: "League Spartan", Arial, sans-serif;
+  color: var(--accent);
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.project-link .arrow {
+  transition: transform 0.25s ease;
+}
+.project-link:hover .arrow {
+  transform: translateX(4px);
 }
 /* watermark logo, same as the contact cards */
 .project-card::after {
@@ -306,25 +442,6 @@ span{
   z-index: 0;
   transform: rotate(-15deg);
 }
-/* keep content above the watermark */
-.project-card > * {
-  position: relative;
-  z-index: 1;
-}
-.showpiece {
-  width: 50%;
-  margin-right: 5px;
-  aspect-ratio: 2 / 3;     
-  border-radius: 12px;
-  overflow: hidden;
-}
-.showpiece img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;        
-  object-position: center;
-}
 .desc {
   width: 50%;
   margin-top: 10px;
@@ -333,23 +450,101 @@ span{
   flex-direction: column;
   gap: 8px;
 }
-.social-media-platform {
-  margin: 0;
-  color: white;
-  font-family: "Liga Sans", Arial, sans-serif;
-  font-size: 28px;
-}
-.project-desc {
-  color: white;
-  font-family: "Liga Sans", Arial, sans-serif;
-  font-size: 16px;
-  line-height: 1.5;
-  opacity: 0.85;
-}
 /* hides the description area while it's still empty */
 .project-desc:empty {
   display: none;
 }
+/* Stats bar */
+.stats-sec {
+  background: var(--navy-base);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 60px;
+  padding: 60px 40px;
+}
+.stat-item {
+  text-align: center;
+}
+.stat-number {
+  font-family: "Liga Sans", Arial, sans-serif;
+  font-size: 42px;
+  color: var(--accent);
+  font-weight: bold;
+}
+.stat-label {
+  font-family: "League Spartan", Arial, sans-serif;
+  color: white;
+  font-size: 15px;
+  opacity: 0.8;
+  margin-top: 4px;
+}
+/* Awards row */
+.awards-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  padding-bottom: 60px;
+  margin-bottom: 60px;
+}
+.award-badge {
+  color: black;
+  font-family: "League Spartan", Arial, sans-serif;
+  font-size: 18px;
+  padding: 8px 18px;
+  border-radius: 999px;
+  background: var(--accent);
+}
+
+
+/* Testimonials */
+.testimonials-sec {
+  background: var(--navy-darker);
+  padding: 80px 40px;
+  display: flex;
+  clip-path: polygon(100% 40px, 0 0, 0 100%, 100% 100%);
+  margin-top: -70px; /* pulls it up to overlap the hero */
+  padding-top: 80px;
+  flex-direction: column;
+  align-items: center;
+}
+.section-heading {
+  font-family: "Liga Sans", Arial, sans-serif;
+  color: white;
+  font-size: 40px;
+  margin-bottom: 50px;
+}
+.testimonial-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+  max-width: 1100px;
+}
+.testimonial-card {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 30px;
+  width: 300px;
+}
+.testimonial-text {
+  color: white;
+  font-family: "League Spartan", Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  opacity: 0.9;
+}
+.testimonial-author {
+  color: var(--accent);
+  font-family: "League Spartan", Arial, sans-serif;
+  font-size: 14px;
+  margin-top: 16px;
+}
+
 
 
 .reach-me{
@@ -358,8 +553,11 @@ span{
     flex-direction: column;
     align-items: center;
     justify-content: start;
-    background-color:rgb(0, 0, 0);
-    padding-left: 0 50px;
+    clip-path: polygon(0 40px, 100% 0, 100% 100%, 0 100%);
+    margin-top: -70px; /* pulls it up to overlap the hero */
+    padding-top: 80px;
+    scroll-margin: -60px;
+    background: var(--navy-deepest);
 }
 .reach-me-heading{
     font-family: "Liga Sans", Arial, sans-serif;
@@ -375,26 +573,55 @@ span{
     gap: 20px;
 }
 .contact-1{
-    width: 400px;
+    width: fit-content;
     height: fit-content;
     display: flex;
-    border: 1px solid white;
     border-radius: 25px;
+    align-items: center;
     flex-direction: column;
-    justify-content: start;
     padding: 10px 10px 10px 10px;
-    background-color: black;
+    position: relative;
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    overflow: hidden;
+    background-color: #0a1628;
+    isolation: isolate;
 }
-.profile{
-    width: 50%;
-    height: 70%;
-    border-radius: 20px;
+/* Layer 2: the frosted glass that blurs the logo behind it */
+.contact-1::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  background: rgba(255, 255, 255, 0.04);
+  z-index: 1;
+}
+.contact-1::after {
+  content: "";
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  background: var(--brand);
+  -webkit-mask: var(--watermark) no-repeat center / contain;
+  mask: var(--watermark) no-repeat center / contain;
+  opacity: 0.65;
+  pointer-events: none;
+  z-index: 0;
+  transform: rotate(-15deg);
+}
+/* Layer 3: your actual content, sharp and on top */
+.contact-1 .profile,
+.contact-1 .socials {
+  position: relative;
+  z-index: 2;
 }
 .profile {
   width: 160px;
   height: 160px;
   flex-shrink: 0;
-  border-radius: 12px;
+  border-radius: 50%;
   overflow: hidden;
 }
 .profile img {
@@ -408,31 +635,28 @@ span{
     height: fit-content;
     margin-top: 10px;
     display: flex;
-    border-radius: 13px;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-evenly;
     padding: 5px;
 }
 .social-logo{
-    width: 50%;
+    width: fit-content;
     height: 100%;
-    padding: 5px;
-    margin-right: 5px;
 }
 .social-handle{
-    width: 50%;
+    width: fit-content;
     height: 100%;
-    padding: 5px;
+    
 }
 .social-logo {
   display: flex;
   align-items: center;
+  margin-right: 5px;
   justify-content: center;
 }
 .social-logo img {
   height: 20px;
   width: 20px;
-  margin-right: 5px;
 }
 .social-handle {
   display: flex;
@@ -448,26 +672,12 @@ span{
   color: white;
   font-family: "League Spartan", Arial, sans-serif;
 }
+.contact-1.whatsapp .social-handle a,
+.contact-1.phone .social-handle a {
+  font-size: 16px; /* smaller than the 20px default */
+}
 
-.contact-1 {
-  position: relative;
-  overflow: hidden;
-}
-.contact-1::after {
-  content: "";
-  position: absolute;
-  top: 9px;
-  right: 13px;
-  width: 220px;
-  height: 220px;
-  background: var(--brand);
-  -webkit-mask: var(--watermark) no-repeat center / contain;
-  mask: var(--watermark) no-repeat center / contain;
-  opacity: 0.15;
-  pointer-events: none;
-  z-index: 0;
-  transform: rotate(-15deg);
-}
+
 .contact-1.instagram {
   --watermark: url("https://cdn.simpleicons.org/instagram");
   --brand: linear-gradient(45deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5);
@@ -501,6 +711,8 @@ span{
 .contact-1.instagram::after { transform: rotate(-15deg); }
 .contact-1.youtube::after   { transform: rotate(12deg); }
 .contact-1.facebook::after  { transform: rotate(-8deg); }
+
+
 
 
 
