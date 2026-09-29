@@ -1,0 +1,44 @@
+media:
+  input: images
+  output: /images
+
+content:
+  - name: navigation
+    label: Menu links
+    type: file
+    path: data/navigation.json
+    fields:
+      - { name: home, label: Home, type: string }
+      - { name: about, label: About Me, type: string }
+      - { name: services, label: Services, type: string }
+      - { name: projects, label: Projects, type: string }
+      - { name: testimonials, label: Testimonials, type: string }
+      - { name: reach_me, label: Reach Me, type: string }
+
+  - name: hero
+    label: Hero
+    type: file
+    path: data/hero.json
+    fields:
+      - { name: first_name, label: First name, type: string }
+      - { name: last_name, label: Last name, type: string }
+      - { name: subtitle, label: Subtitle, type: string }
+      - { name: background_image, label: Background image, type: image }
+
+  - name: about
+    label: About
+    type: file
+    path: data/about.json
+    fields:
+      - { name: intro_before, label: Line 1 - text before name, type: string }
+      - { name: name, label: Line 1 - name, type: string }
+      - { name: intro_after, label: Line 1 - text after name, type: string }
+      - { name: role_before, label: Line 2 - text before highlight, type: string }
+      - { name: profession, label: Line 2 - highlighted word, type: string }
+      - { name: role_after, label: Line 2 - text after highlight, type: string }
+      - { name: subtext_before, label: Sub-text - before highlight, type: string }
+      - { name: years_experience, label: Sub-text - highlighted part, type: string }
+      - { name: subtext_after, label: Sub-text - after highlight, type: string }
+      - { name: bio, label: Bio, type: text }
+      - { name: photo, label: Portrait photo, type: image }
+      - { name: photo_alt, label: Portrait alt text, type: string }

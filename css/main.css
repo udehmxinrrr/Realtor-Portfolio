@@ -35,7 +35,7 @@ html{
 
 
 .hero{
-    background-image: url(../pexels-dennis-salamida-1882776-14974363.jpg);
+    background-image: var(--hero-bg, url(../pexels-dennis-salamida-1882776-14974363.jpg));
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
