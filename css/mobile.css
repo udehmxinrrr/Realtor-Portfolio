@@ -1,4 +1,4 @@
-@media (max-width: 900px) {
+@media (max-width: 999px) {
   .contact {
     grid-template-columns: 1fr;   /* better placed next to your .contact rules */
   }
@@ -47,7 +47,7 @@
 
   /* ------- About Me --------*/
   .photo-wrapper {
-    order: -1;
+    flex: 1.5 1 280px;
   }
   .blob-photo {
     top: 50%;
@@ -127,6 +127,24 @@
   }
 }
 
+
+
+@media (max-width: 800px) {
+  .about-content,
+  .photo-wrapper {
+    flex: 1 1 100%;        /* forces the stack, so it always matches the rules below */
+  }
+  .photo-wrapper {
+    order: -1;
+  }
+  .blob-photo {
+    top: 50%;
+    left: 50%;
+    right: auto;
+    bottom: auto;
+    transform: translate(-50%, -50%);
+  }
+}
 
 
 @media (max-width: 650px) {
