@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/mobile.css">
     <title>Document</title>
@@ -17,10 +17,26 @@
             <a href="#project-sec" class="nav-links">Projects</a>
             <a href="#testimonials" class="nav-links">Testimonials</a>
             <a href="#reach-me-sec" class="nav-links">Reach Me</a>
+
+            <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu">
+            <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+            </button>
+        </div>
+
+        <!-- outside .navbar -->
+        <div class="mobile-menu-backdrop" id="mobileMenuBackdrop"></div>
+
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="#hero" class="mobile-link">Home</a>
+            <a href="#about" class="mobile-link">About Me</a>
+            <a href="#serv-sec" class="mobile-link">Services</a>
+            <a href="#project-sec" class="mobile-link">Projects</a>
+            <a href="#testimonials" class="mobile-link">Testimonials</a>
+            <a href="#reach-me-sec" class="mobile-link">Reach Me</a>
         </div>
 
         <div class="hero-content">
-            <h1 class="hero-h1 reveal">John Doe</h1>
+            <h1 class="hero-h1 reveal"><span>John</span> <span>Doe</span></h1>
             <h3 class="hero-h3 reveal">Realtor</h3>
         </div>
     </section>
@@ -186,8 +202,6 @@
     </section>
 
 
-    
-
     <section class="testimonials-sec" id="testimonials">
         <p class="section-heading reveal">What Clients Say</p>
         <div class="testimonial-grid">
@@ -317,5 +331,7 @@
 
         revealEls.forEach(el => observer.observe(el));
     </script>
+    <script src="../javascript/main.js"></script>
+
 </body>
 </html>

@@ -1,5 +1,323 @@
 @media (max-width: 900px) {
   .contact {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr;   /* better placed next to your .contact rules */
+  }
+  .about-sec    { scroll-margin-top: 20px; }
+  .services     { scroll-margin-top: -30px; }
+  .projects     { scroll-margin-top: -10px; }
+  .testimonials-sec { scroll-margin-top: 10px; }
+  .reach-me     { scroll-margin-top: -10px; }
+
+
+ .hero-h1,
+  .hero-h3 {
+    padding-left: 24px;      /* 60px is too much on a phone */
+  }
+  .hero-h1 {
+    font-size: clamp(3.5rem, 22vw, 6.25rem);
+    background: linear-gradient(90deg, #03f0f0, #7be965);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    width: fit-content;
+  }
+  .hero-h3 {
+    font-size: 1.1rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;   /* "Realtor" as a small tracked label */
+    margin-top: 12px;
+    background: linear-gradient(90deg, #03f0f0);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    width: fit-content;
+  }
+  .hero { position: relative; }
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(10, 22, 40, 0.85), rgba(10, 22, 40, 0) 80%);
+    pointer-events: none;
+  }
+  .hero-content { position: relative; }   /* keeps text above the overlay */
+
+
+  /* ------- About Me --------*/
+  .photo-wrapper {
+    order: -1;
+  }
+  .blob-photo {
+    top: 50%;
+    left: 50%;
+    right: auto;
+    bottom: auto;
+    transform: translate(-50%, -50%);
+  }
+
+
+  /* ------- Services --------*/
+    .service {
+    width: 100%;
+    padding-inline: 0;        /* keeps your bottom padding */
+  }
+  .service-card {
+    box-sizing: border-box;   /* see note below */
+    width: 90%;
+    max-width: 360px;         /* same visual size as desktop */
+  }
+  .serv-heading {
+    align-self: center;
+    text-align: center;
+  }
+
+
+  /* ------- Projects --------*/
+  .project {
+    width: 100%;
+  }
+  .proj-heading {
+    align-self: center;
+    text-align: center;
+  }
+  .project-card {
+    flex: 0 0 auto;      /* stops the 300px flex-basis overriding the width */
+    width: 90%;
+    max-width: 380px;    /* your existing maximum */
+  }
+
+
+  /* ------- Testimonials --------*/
+  .testimonials-sec {
+    padding-inline: 0;        /* keeps your top padding */
+  }
+  .section-heading {
+    text-align: center;       /* stays centred if it ever wraps */
+  }
+  .testimonial-grid {
+    width: 100%;              /* gives the 90% something to measure against */
+  }
+  .testimonial-card {
+    box-sizing: border-box;
+    width: 90%;
+    max-width: 362px;         /* same visual size as desktop */
+  }
+
+
+  /* ------- Reach Me --------*/
+  .reach-me-heading {
+    text-align: center;
+    text-wrap: balance;      /* splits the lines evenly, so no lone word on the last line */
+  }
+  .contact {
+    width: 100%;
+    flex-direction: column;  /* one card per row */
+    align-items: center;
+  }
+  .contact-1 {
+    box-sizing: border-box;
+    width: 90%;
+    max-width: 320px;
+  }
+  .socials{
+    justify-content: center;
+    gap: 5px;
+  }
+}
+
+
+
+@media (max-width: 650px) {
+  .about-sec    { scroll-margin-top: 20px; }
+  .services     { scroll-margin-top: -30px; }
+  .projects     { scroll-margin-top: -10px; }
+  .testimonials-sec { scroll-margin-top: 10px; }
+  .reach-me     { scroll-margin-top: -40px; }
+
+
+  .navbar {
+    left: 16px;
+    transform: none;
+    width: 56px;
+    height: 56px;
+    padding: 0;
+    gap: 0;
+    border-radius: 50%;
+  }
+  .navbar .nav-links { display: none; }
+  .navbar .nav-toggle { display: flex; }
+  .hero { min-height: 70svh; }
+
+  .mobile-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: min(280px, 80vw);
+  padding: 96px 32px 32px;   /* top padding clears the hamburger */
+  z-index: 999;
+  background-color: var(--glass);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  transform: translateX(-100%);
+  visibility: hidden;
+  transition: transform 0.35s ease, visibility 0s linear 0.35s;
+  }
+  .mobile-menu.open {
+    transform: translateX(0);
+    visibility: visible;
+    transition: transform 0.35s ease, visibility 0s;
+  }
+  .mobile-link {
+    color: #fff;
+    font-family: "Liga Sans", Arial, sans-serif;
+    font-weight: 900;
+    font-size: 1.4rem;
+  }
+  .mobile-link:hover {
+    color: var(--accent);
+  }
+  .mobile-menu-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 998;
+    background: rgba(0, 0, 0, 0.4);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+  }
+  .mobile-menu-backdrop.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+
+
+  .hero-h1,
+  .hero-h3 {
+    padding-left: 24px;      /* 60px is too much on a phone */
+  }
+  .hero-h1 {
+    font-size: clamp(3.5rem, 22vw, 6.25rem);
+    line-height: 0.9;
+    background: linear-gradient(90deg, #03f0f0, #7be965);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    width: fit-content;
+  }
+  .hero-h1 span {
+    display: block;
+  }
+  .hero-h3 {
+    font-size: 1.1rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;   /* "Realtor" as a small tracked label */
+    margin-top: 12px;
+    background: linear-gradient(90deg, #03f0f0);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    width: fit-content;
+  }
+  .hero { position: relative; }
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(10, 22, 40, 0.85), rgba(10, 22, 40, 0) 80%);
+    pointer-events: none;
+  }
+  .hero-content { position: relative; }   /* keeps text above the overlay */
+
+
+  /* ------- About Me --------*/
+  .photo-wrapper {
+    order: -1;
+  }
+  .blob-photo {
+    top: 50%;
+    left: 50%;
+    right: auto;
+    bottom: auto;
+    transform: translate(-50%, -50%);
+  }
+
+
+  /* ------- Services --------*/
+    .service {
+    width: 100%;
+    padding-inline: 0;        /* keeps your bottom padding */
+  }
+  .service-card {
+    box-sizing: border-box;   /* see note below */
+    width: 90%;
+    max-width: 360px;         /* same visual size as desktop */
+  }
+  .serv-heading {
+    align-self: center;
+    text-align: center;
+  }
+
+
+  /* ------- Projects --------*/
+  .project {
+    width: 100%;
+  }
+  .proj-heading {
+    align-self: center;
+    text-align: center;
+  }
+  .project-card {
+    flex: 0 0 auto;      /* stops the 300px flex-basis overriding the width */
+    width: 90%;
+    max-width: 380px;    /* your existing maximum */
+  }
+
+
+  /* ------- Testimonials --------*/
+  .testimonials-sec {
+    padding-inline: 0;        /* keeps your top padding */
+  }
+  .section-heading {
+    text-align: center;       /* stays centred if it ever wraps */
+  }
+  .testimonial-grid {
+    width: 100%;              /* gives the 90% something to measure against */
+  }
+  .testimonial-card {
+    box-sizing: border-box;
+    width: 90%;
+    max-width: 362px;         /* same visual size as desktop */
+  }
+
+
+    /* ------- Reach Me --------*/
+  .reach-me-heading {
+    text-align: center;
+    text-wrap: balance;      /* splits the lines evenly, so no lone word on the last line */
+  }
+  .contact {
+    width: 100%;
+    flex-direction: column;  /* one card per row */
+    align-items: center;
+  }
+  .contact-1 {
+    box-sizing: border-box;
+    width: 90%;
+    max-width: 320px;
+  }
+  .socials{
+    justify-content: center;
+    gap: 5px;
   }
 }

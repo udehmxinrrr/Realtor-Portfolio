@@ -13,8 +13,10 @@ html{
   --navy-base: #0a1628;      /* your About section navy */
   --navy-darker: #060d1a;    /* one shade down, for variation */
   --navy-deepest: #030710;   /* deepest shade, for Contact */
-  --accent: #f0bf2e;         /* your gold */
+  --accent: #03f0f0;         /* your gold */
+  --glass: rgba(10, 22, 40, 0.5);   /* change the alpha here to adjust both */
 }
+
 
 @font-face{
     font-family: Liga Sans;
@@ -31,6 +33,7 @@ html{
     font-display: swap;
 }
 
+
 .hero{
     background-image: url(../pexels-dennis-salamida-1882776-14974363.jpg);
     background-size: cover;
@@ -38,10 +41,9 @@ html{
     background-repeat: no-repeat;
     min-height: 100vh;
 }
-
 .hero-h1,
 .hero-h3 {
-  background: linear-gradient(90deg, #2eb8b8, #ffd98a);
+  background: linear-gradient(90deg, #03f0f0, #ffd98a);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -52,6 +54,7 @@ html{
 
   animation: rise .8s ease both;
 }
+
 
 .hero-h1, .hero .role { animation: rise .8s ease both; }
 .hero .role { animation-delay: .25s; }
@@ -64,7 +67,6 @@ html{
   from { opacity: 0; transform: translateY(40px); }
   to   { opacity: 1; transform: none; }
 }
-
 .reveal {
   opacity: 0;
   transform: translateY(40px);
@@ -77,136 +79,206 @@ html{
 }
 
 
-.navbar{
-    z-index: 1000;
-    width: fit-content;
-    box-sizing: content-box;
-    height: 20px;
-    font-family: "Liga Sans", Arial, sans-serif;
-    font-weight: 900;
-    gap: 20px;
-    top: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    align-items: center;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    padding: 20px 32px;
-    position: fixed;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-    border-radius: 50px;
-    background-color: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(10px);
-   -webkit-backdrop-filter: blur(10px);
-}
+
 a{
-    text-decoration: none;
+  text-decoration: none;
 }
-.nav-links{
-    color: rgb(0, 0, 0);
-    font-size: 20px;
-}
-.nav-links:hover{
-    color: var(--accent);
-}
-.hero-content{
-    width: 100%;
-    height: 80vh;
-    display: flex;
-    padding: 80px 0 0 0;   
-    flex-direction: column;
-    justify-content: center;  
-    align-items: flex-start; 
-}
-.hero-h1{
-    font-family: "Liga Sans", Arial, sans-serif;
-    color: var(--accent);
-    font-size: 135px;
-    padding-left: 100px;
-}
-.hero-h3{
-    font-family: "Liga Sans", Arial, sans-serif;
-    color: var(--accent);
-    font-size: 70px;
-    padding-left: 100px;
-}
-
-
-.about-sec{
-    min-height: 500px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    background: #0a1628; /* your navy */
-    clip-path: polygon(0 40px, 100% 0, 100% 100%, 0 100%);
-    margin-top: -70px; /* pulls it up to overlap the hero */
-    scroll-margin: -40px;
-}
-.about-inner {
+.navbar {
+  position: fixed;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
+  gap: 20px;
+  width: fit-content;
+  height: 20px;
+  padding: 20px 32px;
+  box-sizing: content-box;
+  border-radius: 50px;
+  background-color: var(--glass);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  font-family: "Liga Sans", Arial, sans-serif;
+  font-weight: 900;
+}
+.nav-links {
+  color: #d1dddd;
+  font-size: 1rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.nav-links:hover {
+  color: var(--accent);
+}
+/* Mobile-only elements hidden on desktop */
+.navbar .nav-toggle,
+.mobile-menu,
+.mobile-menu-backdrop {
+  display: none;
+}
+/* Hamburger styling (shown only on mobile) */
+.navbar .nav-toggle {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  background: none;
+  border: 0;
+  outline: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.navbar .nav-toggle .bar {
+  display: block;
+  width: 24px;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(145deg, #03f0f0, #8affff);
+}
+.navbar .nav-toggle .bar {
+  transition: transform 0.3s ease, opacity 0.2s ease;
+}
+/* Open state: lines become an X */
+.navbar .nav-toggle[aria-expanded="true"] .bar:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+.navbar .nav-toggle[aria-expanded="true"] .bar:nth-child(2) {
+  opacity: 0;
+}
+.navbar .nav-toggle[aria-expanded="true"] .bar:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+/* ---------- Hero ---------- */
+.hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  background-size: cover;
+  background-position: center;
+}
+/* Dark fade at the bottom so the text stays readable over the photo */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(10, 22, 40, 0.75), rgba(10, 22, 40, 0) 60%);
+  pointer-events: none;
+}
+.hero-content {
+  position: relative;               /* keeps the text above the overlay */
+  width: 100%;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;        /* anchors the text to the bottom-left */
+  align-items: flex-start;
+  padding: 80px 0 80px 0;
+}
+.hero-h1,
+.hero-h3 {
+  font-family: "Liga Sans", Arial, sans-serif;
+  padding-left: 60px;
+}
+.hero-h1 {
+  font-size: clamp(4rem, 9vw, 9rem);
+  line-height: 1.1;                    /* was 0.9; a single line needs more room */
+  width: fit-content;
+  background: linear-gradient(90deg, #03f0f0, #7be965);   /* left to right suits one line */
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 12px rgba(0, 0, 0, 0.45));
+}
+.hero-h3 {
+  font-size: 1.4rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;           /* "Realtor" as a small label */
+  margin-top: 16px;
+  max-width: 36ch;
+  background: linear-gradient(160deg, #03f0f0);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 12px rgba(0, 0, 0, 0.45));
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
+}
+
+
+
+.about-sec {
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: #0a1628;
+  clip-path: polygon(0 40px, 100% 0, 100% 100%, 0 100%);
+  margin-top: -70px;
+  scroll-margin: -40px;
+}
+.about-inner {
+  display: flex;
+  flex-wrap: wrap;                       /* columns stack when there isn't room */
+  align-items: center;
   justify-content: space-between;
   width: 100%;
-  max-width: 1200px; /* caps how wide the content spreads on big screens */
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 40px 80px;
-  gap: 40px;
+  padding: 80px clamp(24px, 6vw, 80px);  /* 24px on phones, 80px on desktop */
+  gap: clamp(16px, 4vw, 40px);
+  box-sizing: border-box;
 }
 .about-content {
-  padding: 70px 0;
-  width: 50%;
-  height: fit-content;
+  flex: 1 1 380px;                       /* grows, shrinks, wraps below ~380px */
+  padding: clamp(32px, 6vw, 70px) 0;
 }
 .photo-wrapper {
-  padding: 70px 0;
-  width: 45%;
-  height: fit-content;
+  flex: 1 1 280px;
   display: flex;
-  justify-content: center; /* centers the fixed-width blob within its column */
-}
-.about-content{
-    padding: 70px 0;
-    width: 45%;
-    height: fit-content;
-}
-.blob-photo {
-  width: 450px;
-  height: 450px; /* match width for a true circle */
-  object-fit: cover;
-  border-radius: 50%;
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  z-index: 2;
+  justify-content: center;
+  padding: clamp(16px, 4vw, 70px) 0;
 }
 .blob-wrapper {
   position: relative;
-  width: 500px;
-  height: 500px;
+  width: min(100%, 500px);               /* never wider than its column */
+  aspect-ratio: 1;                       /* stays square without a fixed height */
 }
-.about-txt{
-    font-family: "Liga Sans", Arial, sans-serif;
-    color: rgb(255, 255, 255);
-    font-size: 60px;
+.blob-photo {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 90%;                            /* 450 / 500, same offset look as before */
+  height: 90%;
+  object-fit: cover;
+  border-radius: 50%;
+  z-index: 2;
 }
-.about-subtxt{
-    font-family: "Liga Sans", Arial, sans-serif;
-    color: rgb(255, 255, 255);
-    font-size: 34px;
+/* Text */
+.about-txt,
+.about-subtxt,
+.about-context {
+  font-family: "Liga Sans", Arial, sans-serif;
+  color: #fff;
+  overflow-wrap: break-word;
 }
-.about-context{
-    font-family: "Liga Sans", Arial, sans-serif;
-    color: rgb(255, 255, 255);
-    font-size: 20px;
-}
-span{
-    color: var(--accent);
-}
-.span-txt-1{
-    font-size: 50px;
+
+.about-txt     { font-size: clamp(2rem, 6vw, 3.75rem); line-height: 1.1; }
+.about-subtxt  { font-size: clamp(1.25rem, 3vw, 2.125rem); line-height: 1.2; }
+.about-context { font-size: clamp(1rem, 0.9rem + 0.4vw, 1.25rem); line-height: 1.6; }
+
+.about-sec span {                        /* scoped so it can't leak into other sections */
+  color: #03f0f0;
 }
 .hero-h1, .project-info,
 .hero-h3, .project-desc,
@@ -235,7 +307,7 @@ span{
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0 50px 60px;
+  padding: 0 50px 140px;
 }
 .serv-heading {
   align-self: flex-start;
@@ -281,6 +353,12 @@ span{
   align-items: center;
   justify-content: center;
   margin-bottom: 0;
+}
+.service-icon svg {
+  stroke: #03f0f0;
+}
+.service-icon {
+  background: rgba(3, 240, 240, 0.1);   /* was rgba(240, 191, 46, 0.1), the yellow tint behind each icon */
 }
 .service-icon img {
   width: 26px;
@@ -373,6 +451,7 @@ span{
     color: rgb(255, 255, 255);
     padding-top: 20px;
     font-size: 50px;
+    margin-bottom: 24px;
 }
 .project-card {
   background: rgba(255, 255, 255, 0.04);
@@ -409,22 +488,6 @@ span{
   opacity: 0.8;
   line-height: 1.7;
   margin-bottom: 20px;
-}
-.project-link {
-  font-family: "League Spartan", Arial, sans-serif;
-  color: var(--accent);
-  font-size: 14px;
-  font-weight: bold;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-.project-link .arrow {
-  transition: transform 0.25s ease;
-}
-.project-link:hover .arrow {
-  transform: translateX(4px);
 }
 /* watermark logo, same as the contact cards */
 .project-card::after {
@@ -556,7 +619,7 @@ span{
     clip-path: polygon(0 40px, 100% 0, 100% 100%, 0 100%);
     margin-top: -70px; /* pulls it up to overlap the hero */
     padding-top: 80px;
-    scroll-margin: -60px;
+    padding: 0 50px 140px;
     background: var(--navy-deepest);
 }
 .reach-me-heading{
@@ -638,6 +701,15 @@ span{
     flex-direction: row;
     justify-content: space-evenly;
     padding: 5px;
+    align-items: center; 
+}
+.social-handle a {
+  display: block;
+  line-height: 1;              /* removes the extra space under the digits */
+}
+.contact-1.whatsapp .social-handle a,
+.contact-1.phone .social-handle a {
+  padding-top: 2px;            /* small optical nudge for numbers */
 }
 .social-logo{
     width: fit-content;
@@ -646,7 +718,6 @@ span{
 .social-handle{
     width: fit-content;
     height: 100%;
-    
 }
 .social-logo {
   display: flex;
