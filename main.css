@@ -20,22 +20,14 @@ html{
 
 @font-face{
     font-family: Liga Sans;
-<<<<<<< HEAD
-    src: url("./fonts/LigaSans-Bold.otf") format("opentype");
-=======
     src: url("/fonts/LigaSans-Bold.otf") format("opentype");
->>>>>>> 4ba0aa33c6353187b79dd8425e587c31ef385225
     font-weight: 400px;
     font-style: normal;
     font-display: swap;
 }
 @font-face{
     font-family: League Spartan;
-<<<<<<< HEAD
-    src: url("./fonts/LeagueSpartan-VF.woff") format("woff");
-=======
     src: url("/fonts/LeagueSpartan-VF.woff") format("woff");
->>>>>>> 4ba0aa33c6353187b79dd8425e587c31ef385225
     font-weight: 400px;
     font-style: normal;
     font-display: swap;
